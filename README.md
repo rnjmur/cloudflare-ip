@@ -29,3 +29,5 @@ Be aware, this only works if your site is on the Cloudflare CDN. See the require
 <h2>Optional:</h2>
 
   - SMTP email, to send an update when the IP changes
+
+Additional info and instructions can be found on the <a href=https://github.com/rnjmur/cloudflare-ip/wiki>Wiki</a> page.
