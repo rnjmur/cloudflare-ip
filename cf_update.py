@@ -151,6 +151,7 @@ class CFUpdate:
     def CFUpdateCheck(cf_configfile, is_service=False):
         if not is_service:
             CFUpdate.ParseZones(cf_configfile)
+            CFUpdate.SendMail(cf_configfile)
         else:
             CFUpdate.daemonStart(cf_configfile)
     
@@ -160,4 +161,4 @@ class CFUpdate:
             CFUpdate.ParseZones(cf_configfile)
             if threading.activeCount() > 1:
                 time.sleep(5)
-            #CFUpdate.SendMail(cf_configfile)
+            CFUpdate.SendMail(cf_configfile)
