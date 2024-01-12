@@ -1,34 +1,31 @@
 # Cloudflare DNS Auto IP Updater
 
-This is a script I made that will automatically update my A record's IP address whenever my web server's IP changes.
+Use cloudflare API to update IPs when Dynamic IP changes
 
-I don't have (nor can I afford) a static ip, meaning that my IP address constantly changes. Whenever it <i>does</i> change (usually while I'm sleeping), it means that my site becomes completely inaccessible. So, I attempted to create a solution, which is this script. It can also send you an email and log all IP changes to a file to let you know it's been updated.
+Python3 is required. The tool currently only works with API tokens but I am working to add the ability to use API keys as well.
+
+This tool will update your cloudflare A records whenever a dynamic IP address change is detected.
+
+Simply add your cloudflare info into the cfauth.ini file and then run the cf-dyn-ip-updater.py file. Make sure your generated API token has DNS edit rights configured properly for your zones or the updates will not work.
+
+If you run cf-dyn-ip-updater.py -q or cf-dyn-ip-updater.py --query it will use the cloudflare API tokens configured for each zone and run a query returning a list of all zone and record ids available. For the query to work properly you must use an API token that has at least read permission for ALL zones. The query will print out the cfauth.ini zone_id, bearer token, and record_id configuration so that you can copy and paste it into the cfauth.ini file.
+
+If this program helps you out then I appreciate any donations!
+
+PayPal: https://paypal.me/JMurley77?locale.x=en_US
 
 Be aware, this only works if your site is on the Cloudflare CDN. See the requirements below:
 
 <h2>Requirements:</h2>
 
-  - Python 3.6 or above
+  - Python 3.8 or above
   - Python requests library (install using `pip3 install requests`)
   - A Cloudflare account with website
   - Cloudflare API Bearer Token
   - Need to know your zone ID
-  - The ID of the A record you want to change
+  - The ID(s) of the A record(s) you want to change
   
   
 <h2>Optional:</h2>
 
   - SMTP email, to send an update when the IP changes
-  
- 
-<h2>Installation:</h2>
-
-On your web server, in any directory, clone this repository:
-
-    git clone https://github.com/pigeonburger/cloudflare-ip/
-        
-Then, open the file `cfauth.ini` in that folder and replace `<YOUR_ZONE_ID>` with your actual Cloudflare Zone ID, `<YOUR_BEARER_TOKEN>` with your API bearer token and `<YOUR_DNS_RECORD_ID>` with the ID of the DNS record you want to change.
-
-If you want email support, add your SMTP details, otherwise just delete everything at the bottom of the script.
-
-Then, if you've done everything, run the `cfautoupdater.py` file!
